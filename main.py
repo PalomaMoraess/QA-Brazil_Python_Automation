@@ -31,44 +31,93 @@ class TestUrbanRoutes:
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
         assert self.page.get_from_location() == data.ADDRESS_FROM
         assert self.page.get_to_location() == data.ADDRESS_TO
-        time.sleep(10)
+
+
+    def test_select_plan(self):
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
+        assert self.page.click_comfort_active()
+
+    def test_fill_phone_number(self):
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_phone_button()
+
+        self.page.enter_phone_number(data.PHONE_NUMBER)
+        self.page.click_next_button()
+
+        code = helpers.retrieve_phone_code(self.driver)
+
+        self.page.enter_sms_code(code)
+        self.page.click_confirm_button()
+
+
+    def test_fill_card(self):
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
+        self.page.click_payment_method()
+        self.page.click_add_card()
+
+        self.page.enter_card_number(data.CARD_NUMBER)
+        self.page.enter_card_code(data.CARD_CODE)
+
+        self.page.click_add_button()
+
+    def test_comment_for_driver(self):
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
+
+        self.page.enter_message_for_driver(data.MESSAGE_FOR_DRIVER)
+
+    def test_order_blanket_and_handkerchiefs(self):
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
+
+        self.page.click_blanket_switch()
+
+        assert self.page.blanket_switch_is_selected()
 
     def test_order_2_ice_creams(self):
         numbers_of_ice_creams = 2
-        for count in range(numbers_of_ice_creams):
-            # Adicionar em S8
-            pass
-        print("Função criada para adicionar quantidade de sorvetes")
 
-    def test_select_plan(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para selecionar o plano")
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
 
-    def test_fill_phone_number(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para preencher o número de telefone")
-
-    def test_fill_card(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para preencher os dados do cartão")
-
-    def test_comment_for_driver(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para adicionar comentário para o motorista")
-
-    def test_order_blanket_and_handkerchiefs(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para solicitar cobertor e lenços")
+        for _ in range(numbers_of_ice_creams):
+            self.page.add_ice_cream()
 
     def test_car_search_model_appears(self):
-        # Adicionar em S8
-        pass
-        print("Função criada para verificar se o modelo do carro aparece")
+        self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
+
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
+
+        self.page.click_payment_method()
+        self.page.click_add_card()
+        self.page.enter_card_number(data.CARD_NUMBER)
+        self.page.enter_card_code(data.CARD_CODE)
+        self.page.click_add_button()
+        self.page.click_close_card_button()
+
+        self.page.click_phone_button()
+        self.page.enter_phone_number(data.PHONE_NUMBER)
+        self.page.click_next_button()
+        code = helpers.retrieve_phone_code(self.driver)
+        self.page.enter_sms_code(code)
+        self.page.click_confirm_button()
+
+        self.page.enter_message_for_driver(data.MESSAGE_FOR_DRIVER)
+        self.page.click_blanket_switch()
+
+        self.page.click_order_taxi_button()
+
+        assert self.page.order_header_is_displayed()
 
     @classmethod
     def teardown_class(cls):
