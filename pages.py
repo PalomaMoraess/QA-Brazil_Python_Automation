@@ -27,6 +27,10 @@ class UrbanRoutesPage:
     # Metodo de pagamento
     payment_method = (By.CLASS_NAME, "pp-button")
     add_card = (By.XPATH, "//div[contains(text(),'Adicionar cartão')]")
+    current_payment_method = (
+        By.XPATH,
+        "//div[contains(@class,'pp-value-text')]"
+    )
 
     # Telefone
     phone_button = (By.CLASS_NAME, "np-button")
@@ -34,6 +38,7 @@ class UrbanRoutesPage:
     next_button = (By.XPATH, "//button[text()='Próximo']")
     sms_code = (By.ID, "code")
     confirm_button = (By.XPATH, "//button[text()='Confirmar']")
+    registered_phone = (By.XPATH, "//div[contains(@class,'np-text')]")
 
     # Comentário
     message_field = (By.ID, "comment")
@@ -51,6 +56,7 @@ class UrbanRoutesPage:
 
     # Sorvete
     ice_cream_plus = (By.CLASS_NAME, "counter-plus")
+    ice_cream_count = (By.CLASS_NAME, "counter-value")
 
     # Pedir táxi
     order_taxi_button = (By.XPATH, "//span[text()='Pedir']")
@@ -100,9 +106,9 @@ class UrbanRoutesPage:
     def click_comfort_icon(self):
         self._click(self.comfort_icon)
 
-    def click_comfort_active(self):
+    def is_comfort_active(self):
         active_button = self._find(self.comfort_active)
-
+        
         return "active" in active_button.get_attribute("class")
 
     def click_payment_method(self):
@@ -110,6 +116,9 @@ class UrbanRoutesPage:
 
     def click_add_card(self):
         self._click(self.add_card)
+
+    def get_current_payment_method(self):
+        return self._get_text(self.current_payment_method)
 
     def enter_card_number(self, number):
         element = self._find(self.card_number)
@@ -144,6 +153,7 @@ class UrbanRoutesPage:
                 )
                 return
 
+
     # Telefone
     def click_phone_button(self):
         self._click(self.phone_button)
@@ -160,10 +170,16 @@ class UrbanRoutesPage:
     def click_confirm_button(self):
         self._click(self.confirm_button)
 
+    def get_registered_phone(self):
+        return self._get_text(self.registered_phone)
+
     # Comentário
 
     def enter_message_for_driver(self, message):
         self._type(self.message_field, message)
+
+    def get_message_for_driver(self):
+        return self._get_value(self.message_field)
 
     # Cobertor e lençóis
     def click_blanket_switch(self):
@@ -177,6 +193,10 @@ class UrbanRoutesPage:
 
     def add_ice_cream(self):
         self._click(self.ice_cream_plus)
+
+    def get_ice_cream_count(self):
+        return int(self._get_text(self.ice_cream_count))
+
 
     # Pedir táxi
 

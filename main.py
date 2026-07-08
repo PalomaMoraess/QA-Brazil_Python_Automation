@@ -32,12 +32,11 @@ class TestUrbanRoutes:
         assert self.page.get_from_location() == data.ADDRESS_FROM
         assert self.page.get_to_location() == data.ADDRESS_TO
 
-
     def test_select_plan(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.page.click_taxi_option()
         self.page.click_comfort_icon()
-        assert self.page.click_comfort_active()
+        assert self.page.is_comfort_active()
 
     def test_fill_phone_number(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
@@ -52,6 +51,8 @@ class TestUrbanRoutes:
         self.page.enter_sms_code(code)
         self.page.click_confirm_button()
 
+        assert self.page.get_registered_phone() == data.PHONE_NUMBER
+
 
     def test_fill_card(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
@@ -65,12 +66,16 @@ class TestUrbanRoutes:
 
         self.page.click_add_button()
 
+        assert self.page.get_current_payment_method() == "Cartão"
+
     def test_comment_for_driver(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.page.click_taxi_option()
         self.page.click_comfort_icon()
 
         self.page.enter_message_for_driver(data.MESSAGE_FOR_DRIVER)
+
+        assert self.page.get_message_for_driver() == data.MESSAGE_FOR_DRIVER
 
     def test_order_blanket_and_handkerchiefs(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
@@ -91,6 +96,8 @@ class TestUrbanRoutes:
 
         for _ in range(numbers_of_ice_creams):
             self.page.add_ice_cream()
+
+        assert self.page.get_ice_cream_count() == numbers_of_ice_creams
 
     def test_car_search_model_appears(self):
         self.page.enter_location(data.ADDRESS_FROM, data.ADDRESS_TO)
