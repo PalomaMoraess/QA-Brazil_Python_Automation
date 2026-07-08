@@ -1,4 +1,4 @@
-Aimport time
+import time
 
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
