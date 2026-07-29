@@ -78,3 +78,29 @@ Execute os testes:
 ```bash
 pytest
 ```
+
+## 🚀 Como executar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/PalomaMoraess/QA-Brazil_Automação_Python.git
+```
+
+### 2. Acesse a pasta do projeto
+
+```bash
+cd QA-Brazil_Automação_Python
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Execute os testes
+
+```bash
+pytest
+```
