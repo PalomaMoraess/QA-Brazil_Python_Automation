@@ -59,25 +59,6 @@ Durante o desenvolvimento deste projeto pude:
 
 ---
 
-## 🚀 Como executar
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/PalomaMoraess/QA-Brazil_Automação_Python.git
-```
-
-Instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-Execute os testes:
-
-```bash
-pytest
-```
 
 ## 🚀 Como executar o projeto
 
