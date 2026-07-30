@@ -38,12 +38,15 @@ QA-Brazil_Automação_Python/
 
 ## ✅ Cenários Automatizados
 
-- Definição da origem e destino da corrida.
-- Seleção da categoria de transporte.
+- Definição da origem e do destino da corrida.
+- Seleção da categoria Comfort.
+- Cadastro e validação do número de telefone.
 - Cadastro da forma de pagamento.
 - Adição de cartão de crédito.
-- Validação de elementos da interface.
-- Fluxo completo de solicitação de corrida.
+- Inclusão de mensagem para o motorista.
+- Solicitação de cobertor e lenços.
+- Adição de dois sorvetes ao pedido.
+- Validação do fluxo completo de solicitação de corrida.
 
 ---
 
